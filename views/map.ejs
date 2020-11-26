@@ -1,0 +1,31 @@
+<%- include ('header') %>
+
+        <div class="logo">
+        <img src="img/logo.png" alt="logo1"></img>
+        </div>
+        <h1>Parkeren</h1>
+
+
+<%- include ('nav') %>
+
+        <div id="map"></div>
+
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+        integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+        crossorigin=""></script>
+        <script src="js/map.js"></script>
+
+        <script>
+            <% for(var i=0; i < parkings.features.length; i++) { %>
+            L.marker([<%-parkings.features[i].geometry.y %>, <%-parkings.features[i].geometry.x %>]).addTo(map)
+                .bindPopup("Adres: <%- parkings.features[i].attributes.ADRES%> </br> Plaatsen: <%- parkings.features[i].attributes.AANTAL_PLAATSEN%>")
+            <% } %>
+        </script>
+    </body>
+
+
+
+<%- include ('footer') %>
+
+</html>
